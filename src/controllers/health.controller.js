@@ -1,9 +1,19 @@
+const {
+  getHealthStatus,
+} = require("../services/health.service");
+
+const apiResponse = require("../utils/apiResponse");
+
 const healthCheck = (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Nova AI Backend is Running 🚀",
-    version: "1.0.0",
-  });
+  const health = getHealthStatus();
+
+  return res.status(200).json(
+    apiResponse(
+      true,
+      "Health Check Successful",
+      health
+    )
+  );
 };
 
 module.exports = {
